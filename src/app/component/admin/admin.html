@@ -1,0 +1,29 @@
+<div class="main">
+    <div *ngIf="!loginSuccess">
+    <form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+    [formControl]="email">
+    <div id="emailHelp" class="form-text"></div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" [formControl]="password">
+  </div>
+  <div class="mb-3 form-check">
+    <strong>Default Credential<br>
+        Email : admin@gmail.com <br>
+        Password : admin
+    </strong >
+  </div>
+  <button type="button" class="btn btn-primary" (click)="loginButton()">Submit</button>
+</form>
+<div *ngIf="displayError" class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3 mt-2">
+  Credentials Entered are Incorrect
+</div>
+</div>
+<div *ngIf="loginSuccess">
+    <app-adminedit></app-adminedit>
+</div>
+</div>

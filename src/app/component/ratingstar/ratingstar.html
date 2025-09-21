@@ -1,0 +1,14 @@
+
+<div >
+    <div *ngIf="!displayError" style="margin-bottom: 10px; margin-top: -5px;">
+    <p style="color: rgb(80, 190, 249);">{{rating}}/5</p>
+    <i *ngFor="let n of numberofstar" class="bi bi-star-fill" [style.color]="_incolor" ></i>
+    <i *ngFor="let m of halfstar" class="bi bi-star-half" [style.color]="_incolor"></i>
+    </div >
+    <div *ngIf="displayError">
+        <p>Invalid Rating</p>
+    </div>
+</div>
+<!-- <i class="bi bi-star-fill"></i> -->
+<!-- <h4>{{numberofstar[0]}}</h4>
+<h4>{{numberofstar[1]}}</h4> -->

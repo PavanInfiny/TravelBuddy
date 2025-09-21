@@ -1,0 +1,113 @@
+<div class="main" style="margin-top: 0%">
+  <table class="table caption-top" style="width: 90%">
+    <thead>
+      <tr>
+        <th scope="col">City ID</th>
+        <th scope="col">City Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Famous Places</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image Link</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let n of service.TravelDestinationObjArray" [id]="n.cityID">
+        <ng-container *ngIf="this.editId != n.cityID">
+          <td scope="row" style="width: 5%">{{ n.cityID }}</td>
+          <td style="width: 10%">{{ n.cityName }}</td>
+          <td style="width: 25%">{{ n.cityDescription }}</td>
+          <td style="width: 10%">
+            <ul>
+              <li *ngFor="let m of n.placesToSee">{{ m }}</li>
+            </ul>
+          </td>
+          <td style="width: 7%">{{ n.price }}</td>
+          <td style="width: 25">
+            <div style="word-break: break-all">{{ n.image }}</div>
+          </td>
+          <td style="width: 8%">
+            <app-ratingstar [rating]="n.rating"></app-ratingstar>
+          </td>
+          <td style="width: 5%">
+            <div style="display: flex; justify-content: center; flex-direction: column">
+              <button class="btn btn-primary" (click)="onEditClick(n.cityID)">Edit</button>
+              <button class="btn btn-danger" (click)="onDeleteClick(n.cityID)">Delete</button>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container *ngIf="this.editId === n.cityID" [formGroup]="editForm">
+          <td scope="row" style="width: 5%">{{ n.cityID }}</td>
+          <td style="width: 10%">
+            <textarea style="width: 100%; height: auto" formControlName="cityname"></textarea>
+            <div *ngIf="editForm.get('cityname')?.invalid && (editForm.get('cityname')?.dirty || editForm.get('cityname')?.touched)" class="text-danger">
+              <p *ngIf="editForm.get('cityname')?.hasError('required')">City Name is Required</p>
+              <p *ngIf="editForm.get('cityname')?.hasError('minlength')">Name should Be Atleast length 3</p>
+            </div>
+          </td>
+          <td style="width: 25%"><textarea formControlName="citydescription"></textarea>
+          <div class="text-danger" *ngIf="editForm.get('citydescription')?.invalid && (editForm.get('citydescription')?.dirty || editForm.get('citydescription')?.touched)">
+            <p *ngIf="editForm.get('citydescription')?.hasError('required')">
+              Description is Required
+            </p>
+            <p *ngIf="editForm.get('citydescription')?.hasError('minlength')">
+              Description should be atleast 10 characters
+            </p>
+          </div></td>
+          <td style="width: 10%">
+            <textarea formControlName="cityplaces" style="width: 100%; height: auto"></textarea>
+            <!-- <input type="text" [value]="n.placesToSee.join(',')"> -->
+          </td>
+          <td style="width: 7%">
+            <textarea formControlName="price" style="width: 100%; height: auto"></textarea>
+            <div class="text-danger" *ngIf="editForm.get('price')?.invalid">
+              <p *ngIf="editForm.get('price')?.hasError('required')">
+                Price is Required
+              </p>
+              <p *ngIf="editForm.get('price')?.hasError('pattern')">
+                Invalid Pattern
+              </p>
+            </div>
+            <!-- <input type="text" [value]="n.price"> -->
+          </td>
+          <td style="width: 25%">
+            <div style="word-break: break-all">
+              <!-- <input type="text" [value]="n.image"> -->
+              <textarea formControlName="image" style="width: 100%; height: auto"></textarea>
+              <div class="text-danger" *ngIf="editForm.get('image')?.invalid">
+                <p *ngIf="editForm.get('image')?.hasError('required')">
+                  url is required
+                </p>
+                <p *ngIf="editForm.get('image')?.hasError('pattern')">
+                  the accepted format is jpg,png,jpec
+                </p>
+              </div>
+            </div>
+          </td>
+          <td style="width: 8%">
+            <textarea formControlName="rating" style="width: 100%; height: auto"></textarea>
+            <div class="text-danger" *ngIf="editForm.get('rating')?.invalid">
+              <p *ngIf="editForm.get('rating')?.hasError('required')">
+                Rating is required
+              </p>
+              <p *ngIf="editForm.get('rating')?.hasError('min')">
+                Rating should be greater then 0
+              </p>
+              <p *ngIf="editForm.get('rating')?.hasError('max')">
+                Rating should be lesser then 5
+              </p>
+            </div>
+          </td>
+          <td style="width: 5%">
+            <div style="display: flex; justify-content: center; flex-direction: column">
+              <button class="btn btn-primary" (click)="onSaveClick()" [disabled]="editForm.invalid">save</button>
+              <button class="btn btn-danger" (click)="onCancelClick()">Cancel</button>
+            </div>
+          </td>
+        </ng-container>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>

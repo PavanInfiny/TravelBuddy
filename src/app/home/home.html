@@ -1,0 +1,70 @@
+<div class="main1">
+
+<div class="home-wrapper ">
+    <link rel="stylesheet" href="home.css" />
+    <div class="img">
+        </div>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Your Adventure Starts Here</h1>
+      <p>Discover breathtaking destinations and unforgettable travel packages.</p>
+      <!-- <div class="search-bar">
+        <input type="text" placeholder="Where do you want to go? (e.g., Europe, Asia)">
+        <button class="btn-search">Search Packages</button>
+      </div> -->
+      </div>
+    
+  </section>
+  
+ <!-- <div *ngFor="let n of topThreeDesination" class="destination-grid"></div> -->
+<section class="featured-destinations">
+    <h2>Popular Destinations</h2>
+    <p class="section-subtitle">Explore our most loved travel packages.</p>
+    <div class="destination-grid">
+      <div *ngFor="let n of topThreeDesination" class="destination-card">
+        <img [src]="n.image" alt="Europe Package">
+        <div class="card-content">
+          <h3>{{n.cityName}}</h3>
+          <p>{{n.cityDescription}}</p>
+          <app-ratingstar [rating]="n.rating"></app-ratingstar>
+          <button class="btn btn-primary but"  routerLink="/city/{{n.cityID}}">View Details</button>
+           
+        </div>
+      </div>
+     
+     
+    </div>
+  </section>
+
+  <section class="why-choose-us">
+    <h2>Why Book With Us?</h2>
+    <p class="section-subtitle">Your journey, our commitment.</p>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <img src="https://img.icons8.com/ios-filled/60/3498db/globe--v1.png" alt="Global Destinations" />
+        <h3>Global Reach</h3>
+        <p>Access to thousands of destinations worldwide.</p>
+      </div>
+      <div class="feature-item">
+        <img src="https://img.icons8.com/ios-filled/60/3498db/handshake.png" alt="Trusted Partners" />
+        <h3>Trusted Partners</h3>
+        <p>Reliable and verified travel service providers.</p>
+      </div>
+      <div class="feature-item">
+        <img src="https://img.icons8.com/ios-filled/60/3498db/customer-service.png" alt="24/7 Support" />
+        <h3>24/7 Support</h3>
+        <p>Assistance available whenever you need it, anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="call-to-action">
+    <h2>Ready for Your Next Adventure?</h2>
+    <p>Browse our exclusive packages and start planning your dream trip today!</p>
+    <button class="btn-secondary" routerLink="/package">Explore All Packages</button>
+  </section>
+</div>
+ 
+
+
+</div>

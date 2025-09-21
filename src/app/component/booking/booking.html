@@ -1,0 +1,77 @@
+
+<div class="main"><div class="row">
+  <div class="col">
+    <input
+      class="form-control me-2 cla1"
+      [(ngModel)]="ValueEntered"
+      type="search"
+      placeholder="Enter the name"
+      aria-label="Search"
+      [ngModelOptions]="{ standalone: true }"
+    />
+  </div>
+  <div class="col">
+
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    SortBy
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" (click)="selectDropdownItem('price')">Price</a></li>
+    <li><a class="dropdown-item" (click)="selectDropdownItem('cityName')">Name</a></li>
+    <li><a class="dropdown-item" (click)="selectDropdownItem('rating')">Rating</a></li>
+  </ul>
+</div>
+
+</div>
+<div class="col"> 
+  <!-- <button class="btn btn-primary">search</button> -->
+  </div>
+  <div class="col"> 
+  <!-- {{dropdownvalue}} -->
+  </div>
+</div>
+
+
+<div style="z-index: 10">
+  <div *ngFor="let n of newArray">
+    <div class="card customcard" >
+      <div class="card-header">
+        {{ n.cityName }}
+      </div>
+      <!-- <button >go there</button> -->
+      <div class="card-body personalcard" >
+        <div class="divfirst">
+          <span [routerLink]="'/city/'+n.cityID" >
+            <blockquote class="blockquote">
+              <p>{{ n.cityDescription }}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              Some famous Places in <cite title="Source Title">{{ n.cityName }}</cite>
+              <ul>
+                <li *ngFor="let m of n.placesToSee">{{m}}</li>
+              </ul>
+            </figcaption>
+
+            <h3>
+              <i class="fw-lighter">Price Starts From : {{ n.price |currency:"INR"}}</i>
+            </h3>
+            <span class="badge rounded-pill text-bg-light">Rating : {{ n.rating }}</span>
+            <app-ratingstar [rating]=n.rating></app-ratingstar>
+            <!-- <button class="btn btn-secondary">Select</button> -->
+          </span>
+        </div>
+        <div class="middlediv">
+          <button [class]="'btn ' + n.btntype" (click)="fun(n)">{{ n.button_name }}</button>
+        </div>
+        <div class="seconddiv">
+          <img *ngIf="n.show_image" class="me-auto image" [src]="n.image" />
+        </div>
+      </div>
+    </div>
+    
+
+    <p>{{ n.cityID }}</p>
+  </div>
+</div>
+</div>

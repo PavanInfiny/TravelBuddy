@@ -60,6 +60,9 @@ export class Adminedit implements OnInit {
     // this.price.setValue(temp.price);
     // this.rating.setValue(temp.rating);
   }
+  onNewClick(){
+    
+  }
   onDeleteClick(id: string) {
     const confirm = window.confirm('Are you sure about deleting the package');
     if (confirm) {

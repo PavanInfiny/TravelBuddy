@@ -3,10 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { TravelDestinationObject } from '../../service/travel-destination-object';
 import { TravelObjectType } from '../../model/TravelModel.type';
 import { CommonModule } from '@angular/common';
+import { Ratingstar } from '../ratingstar/ratingstar';
+
 ActivatedRoute;
 @Component({
   selector: 'app-travelcitycard',
-  imports: [CommonModule],
+  imports: [CommonModule,Ratingstar],
   templateUrl: './travelcitycard.html',
   styleUrl: './travelcitycard.css',
 })

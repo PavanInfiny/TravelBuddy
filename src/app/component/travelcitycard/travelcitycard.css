@@ -5,3 +5,138 @@
     box-shadow: 0px 0px 20px black;
     margin: 30px;
 }
+
+/* General container styling */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Ensures it takes up most of the viewport height */
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for the page */
+}
+
+/* Card styling */
+.travel-card {
+  max-width: 700px; /* Max width for the card */
+  width: 100%;
+  border-radius: 15px; /* Rounded corners for a softer look */
+  overflow: hidden; /* Ensures image corners are also rounded */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+  background-color: #ffffff;
+}
+
+.card-header {
+  background-color: #e9ecef; /* Light grey header */
+  border-bottom: 1px solid #dee2e6;
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 2.2rem; /* Larger title */
+  font-weight: 700;
+  color: #343a40;
+}
+
+.travel-image {
+  height: 350px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensures image covers the area without distortion */
+  border-bottom: 1px solid #dee2e6;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #495057;
+  margin-bottom: 1.5rem;
+}
+
+/* Details Section */
+.details-section {
+  padding: 1rem 0;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: #343a40;
+}
+
+.detail-item strong {
+  min-width: 120px; /* Align labels */
+  color: #212529;
+}
+
+.rating-stars .bi {
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+
+.places-list {
+  margin-left: 10px; /* Indent list items */
+  padding-left: 0;
+  list-style-type: none; /* Remove default bullet points */
+}
+
+.places-list li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+/* Price Display */
+.price-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #ced4da; /* Subtle separator */
+}
+
+.price-label {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.price-value {
+  font-size: 2.5rem; /* Large price display */
+}
+
+/* Action Button */
+.action-button {
+  margin-top: 1.5rem;
+  font-size: 1.3rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Error Container */
+.error-container {
+  background-color: #fff3cd; /* Light yellow background */
+  border: 1px solid #ffeeba;
+  border-radius: 10px;
+  margin: 50px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.error-container h1 {
+  color: #dc3545;
+}
+
+.error-container p {
+  color: #6c757d;
+}

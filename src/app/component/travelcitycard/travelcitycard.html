@@ -1,49 +1,61 @@
-<!-- export type TravelObjectType={
-    cityID:string;
-    cityName :string;
-    cityDescription:string;
-    placesToSee:string[];
-    show_image:string;
-    button_name:string;
-    rating:number;
-    btntype:string;
-    price:number;
-    image:string;
-} -->
+<div class="main-container">
+  <div class="card travel-card shadow-lg">
+    <div class="card-header text-center">
+      <h2 class="card-title mb-0">{{ travelobj?.cityName }}</h2>
+      <small class="text-muted">City ID: {{ travelobj?.cityID }}</small>
+    </div>
 
- <div *ngIf="!toDisplayError" class="main">
-  <div class="card text-center w-75">
+    <img
+      [src]="travelobj?.image || travelobj?.show_image || 'https://via.placeholder.com/600x400?text=No+Image+Available'"
+      class="card-img-top travel-image"
+      alt="Image of {{ travelobj?.cityName }}"
+    />
+
     <div class="card-body">
-      <h5 class="card-title">{{ travelobj?.cityName }}</h5>
-      <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="seconddiv">
-            <img class="me-auto image" [src]="travelobj?.image" />
-          </div>
+      <p class="card-text description">{{ travelobj?.cityDescription }}</p>
 
-          <div class="carousel-item">
-            <img [src]="travelobj?.image" class="d-block w-100" alt="..." />
-          </div>
+      <hr />
+
+      <div class="details-section mb-3">
+        <div class="detail-item mb-2">
+          <strong>Rating:</strong>
+          <span class="rating-stars ms-2">
+          
+            <span class="ms-1">({{ travelobj?.rating || 0 }}/5)</span>
+          </span>
+        </div>
+
+        <div class="detail-item mb-2">
+          <strong>Places to See:</strong>
+          <ul class="places-list list-unstyled mt-1">
+            <li *ngFor="let place of travelobj?.placesToSee">
+              <i class="bi bi-geo-alt-fill me-2 text-primary"></i>{{ place }}
+            </li>
+            <!-- <li >
+              <i class="bi bi-info-circle me-2 text-info"></i>No specific places listed.
+            </li> -->
+          </ul>
+        </div>
+
+        <div class="detail-item price-display text-end">
+          <span class="price-label">Price:</span>
+          <span class="price-value display-6 fw-bold text-success">
+            ${{ travelobj?.price | number:'1.2-2' }}
+          </span>
         </div>
       </div>
 
-      <div class="container text-center">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-2">1 of 3</div>
-          <div class="col-md-auto">Variable width content</div>
-          <div class="col col-lg-2">3 of 3</div>
-        </div>
-        <div class="row">
-          <div class="col">1 of 3</div>
-          <div class="col-md-auto">Variable width content</div>
-          <div class="col col-lg-2">3 of 3</div>
-        </div>
+      <div class="d-grid gap-2">
+        <a href="#" class="btn btn-lg {{ travelobj?.btntype || 'btn-primary' }} action-button">
+          <i class="bi bi-ticket-fill me-2"></i>back
+        </a>
       </div>
-      <a href="#" class="btn btn-primary">Buy Ticket</a>
     </div>
   </div>
-</div> 
+</div>
 
-<div *ngIf="toDisplayError" class="main">
-    <h1>No Such Package Found</h1>
+<div *ngIf="toDisplayError" class="error-container text-center p-5">
+  <h1 class="display-4 text-danger">No Such Package Found</h1>
+  <p class="lead text-muted">We couldn't find any travel packages matching your request. Please try a different search or check your input.</p>
+  <i class="bi bi-emoji-frown display-1 text-danger mt-3"></i>
 </div>

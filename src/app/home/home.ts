@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Booking } from '../component/booking/booking';
 import { Header } from '../component/header/header';
 import { Footer } from '../component/footer/footer';
@@ -16,29 +16,14 @@ import { Ratingstar } from '../component/ratingstar/ratingstar';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit{
   tempvalue:string="rating"
+  topThreeDesination:TravelObjectType[];
   constructor(private service:TravelDestinationObject){
-
+    this.topThreeDesination=this.service.topThreeDesination();
   }
-  get topThreeDesination():TravelObjectType[]{
-    const filteredArray= this.service.TravelDestinationObjArray;
-  
-  const fullObj= filteredArray.sort((a, b) => {
-      const sortProperty = this.tempvalue as keyof TravelObjectType; // Cast to keyof TravelObjectType for type safety
-
-      const valA = a[sortProperty];
-      const valB = b[sortProperty];
-      
-      
-      if (typeof valA === 'string' && typeof valB === 'string') {
-        return valA.localeCompare(valB); 
-      } else if (typeof valA === 'number' && typeof valB === 'number') {
-        return valB - valA;
-      } else {
-        return 0;
-      }
-    });
-    return [fullObj[0],fullObj[1],fullObj[2]]
+  ngOnInit(): void {
+    
   }
+ 
 }

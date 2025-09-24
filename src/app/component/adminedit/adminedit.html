@@ -41,20 +41,36 @@
           <td scope="row" style="width: 5%">{{ n.cityID }}</td>
           <td style="width: 10%">
             <textarea style="width: 100%; height: auto" formControlName="cityname"></textarea>
-            <div *ngIf="editForm.get('cityname')?.invalid && (editForm.get('cityname')?.dirty || editForm.get('cityname')?.touched)" class="text-danger">
+            <div
+              *ngIf="
+                editForm.get('cityname')?.invalid &&
+                (editForm.get('cityname')?.dirty || editForm.get('cityname')?.touched)
+              "
+              class="text-danger"
+            >
               <p *ngIf="editForm.get('cityname')?.hasError('required')">City Name is Required</p>
-              <p *ngIf="editForm.get('cityname')?.hasError('minlength')">Name should Be Atleast length 3</p>
+              <p *ngIf="editForm.get('cityname')?.hasError('minlength')">
+                Name should Be Atleast length 3
+              </p>
             </div>
           </td>
-          <td style="width: 25%"><textarea formControlName="citydescription"></textarea>
-          <div class="text-danger" *ngIf="editForm.get('citydescription')?.invalid && (editForm.get('citydescription')?.dirty || editForm.get('citydescription')?.touched)">
-            <p *ngIf="editForm.get('citydescription')?.hasError('required')">
-              Description is Required
-            </p>
-            <p *ngIf="editForm.get('citydescription')?.hasError('minlength')">
-              Description should be atleast 10 characters
-            </p>
-          </div></td>
+          <td style="width: 25%">
+            <textarea formControlName="citydescription"></textarea>
+            <div
+              class="text-danger"
+              *ngIf="
+                editForm.get('citydescription')?.invalid &&
+                (editForm.get('citydescription')?.dirty || editForm.get('citydescription')?.touched)
+              "
+            >
+              <p *ngIf="editForm.get('citydescription')?.hasError('required')">
+                Description is Required
+              </p>
+              <p *ngIf="editForm.get('citydescription')?.hasError('minlength')">
+                Description should be atleast 10 characters
+              </p>
+            </div>
+          </td>
           <td style="width: 10%">
             <textarea formControlName="cityplaces" style="width: 100%; height: auto"></textarea>
             <!-- <input type="text" [value]="n.placesToSee.join(',')"> -->
@@ -62,12 +78,8 @@
           <td style="width: 7%">
             <textarea formControlName="price" style="width: 100%; height: auto"></textarea>
             <div class="text-danger" *ngIf="editForm.get('price')?.invalid">
-              <p *ngIf="editForm.get('price')?.hasError('required')">
-                Price is Required
-              </p>
-              <p *ngIf="editForm.get('price')?.hasError('pattern')">
-                Invalid Pattern
-              </p>
+              <p *ngIf="editForm.get('price')?.hasError('required')">Price is Required</p>
+              <p *ngIf="editForm.get('price')?.hasError('pattern')">Invalid Pattern</p>
             </div>
             <!-- <input type="text" [value]="n.price"> -->
           </td>
@@ -76,9 +88,7 @@
               <!-- <input type="text" [value]="n.image"> -->
               <textarea formControlName="image" style="width: 100%; height: auto"></textarea>
               <div class="text-danger" *ngIf="editForm.get('image')?.invalid">
-                <p *ngIf="editForm.get('image')?.hasError('required')">
-                  url is required
-                </p>
+                <p *ngIf="editForm.get('image')?.hasError('required')">url is required</p>
                 <p *ngIf="editForm.get('image')?.hasError('pattern')">
                   the accepted format is jpg,png,jpec
                 </p>
@@ -88,29 +98,132 @@
           <td style="width: 8%">
             <textarea formControlName="rating" style="width: 100%; height: auto"></textarea>
             <div class="text-danger" *ngIf="editForm.get('rating')?.invalid">
-              <p *ngIf="editForm.get('rating')?.hasError('required')">
-                Rating is required
-              </p>
-              <p *ngIf="editForm.get('rating')?.hasError('min')">
-                Rating should be greater then 0
-              </p>
-              <p *ngIf="editForm.get('rating')?.hasError('max')">
-                Rating should be lesser then 5
-              </p>
+              <p *ngIf="editForm.get('rating')?.hasError('required')">Rating is required</p>
+              <p *ngIf="editForm.get('rating')?.hasError('min')">Rating should be greater then 0</p>
+              <p *ngIf="editForm.get('rating')?.hasError('max')">Rating should be lesser then 5</p>
             </div>
           </td>
           <td style="width: 5%">
             <div style="display: flex; justify-content: center; flex-direction: column">
-              <button class="btn btn-primary" (click)="onSaveClick()" [disabled]="editForm.invalid">save</button>
+              <button class="btn btn-primary" (click)="onSaveClick()" [disabled]="editForm.invalid">
+                save
+              </button>
               <button class="btn btn-danger" (click)="onCancelClick()">Cancel</button>
             </div>
           </td>
         </ng-container>
-        
+      </tr>
+      <tr>
+        <ng-container *ngIf="!isEdit && addNewCity" [formGroup]="addForm">
+          <td scope="row" style="width: 5%">
+            <textarea formControlName="cityid" placeholder="City ID"></textarea>
+            <div
+              *ngIf="
+                addForm.get('cityid')?.invalid &&
+                (addForm.get('cityid')?.dirty || addForm.get('cityid')?.touched)
+              "
+              class="text-danger"
+            >
+            <p>invalid</p>
+              <!-- <p *ngIf="addForm.get('cityid')?.hasError('pattern')">pattern is invalid</p> -->
+            </div>
+          </td>
+          <td style="width: 10%">
+            <textarea
+              placeholder="City Name"
+              style="width: 100%; height: auto"
+              formControlName="cityname"
+            ></textarea>
+            <div
+              *ngIf="
+                addForm.get('cityname')?.invalid &&
+                (addForm.get('cityname')?.dirty || addForm.get('cityname')?.touched)
+              "
+              class="text-danger"
+            >
+              <p *ngIf="addForm.get('cityname')?.hasError('required')">City Name is Required</p>
+              <p *ngIf="addForm.get('cityname')?.hasError('minlength')">
+                Name should Be Atleast length 3
+              </p>
+            </div>
+          </td>
+          <td style="width: 25%">
+            <textarea formControlName="citydescription" placeholder="City Description"></textarea>
+            <div
+              class="text-danger"
+              *ngIf="
+                addForm.get('citydescription')?.invalid &&
+                (addForm.get('citydescription')?.dirty || editForm.get('citydescription')?.touched)
+              "
+            >
+              <p *ngIf="addForm.get('citydescription')?.hasError('required')">
+                Description is Required
+              </p>
+              <p *ngIf="addForm.get('citydescription')?.hasError('minlength')">
+                Description should be atleast 10 characters
+              </p>
+            </div>
+          </td>
+          <td style="width: 10%">
+            <textarea
+              placeholder="Famous Places seperated by ',' (comma)"
+              formControlName="cityplaces"
+              style="width: 100%; height: auto"
+            ></textarea>
+            <!-- <input type="text" [value]="n.placesToSee.join(',')"> -->
+          </td>
+          <td style="width: 7%">
+            <textarea
+              formControlName="price"
+              style="width: 100%; height: auto"
+              placeholder="Price"
+            ></textarea>
+            <div class="text-danger" *ngIf="addForm.get('price')?.invalid">
+              <p *ngIf="addForm.get('price')?.hasError('required')">Price is Required</p>
+              <p *ngIf="addForm.get('price')?.hasError('pattern')">Invalid Pattern</p>
+            </div>
+            <!-- <input type="text" [value]="n.price"> -->
+          </td>
+          <td style="width: 25%">
+            <div style="word-break: break-all">
+              <!-- <input type="text" [value]="n.image"> -->
+              <textarea
+                formControlName="image"
+                style="width: 100%; height: auto"
+                placeholder="Image URL"
+              ></textarea>
+              <div class="text-danger" *ngIf="addForm.get('image')?.invalid">
+                <p *ngIf="addForm.get('image')?.hasError('required')">url is required</p>
+                <p *ngIf="addForm.get('image')?.hasError('pattern')">
+                  the accepted format is jpg,png,jpec
+                </p>
+              </div>
+            </div>
+          </td>
+          <td style="width: 8%">
+            <textarea
+              formControlName="rating"
+              style="width: 100%; height: auto"
+              placeholder="Rating (0-5)"
+            ></textarea>
+            <div class="text-danger" *ngIf="addForm.get('rating')?.invalid">
+              <p *ngIf="addForm.get('rating')?.hasError('required')">Rating is required</p>
+              <p *ngIf="addForm.get('rating')?.hasError('min')">Rating should be greater then 0</p>
+              <p *ngIf="addForm.get('rating')?.hasError('max')">Rating should be lesser then 5</p>
+            </div>
+          </td>
+          <td style="width: 5%">
+            <div style="display: flex; justify-content: center; flex-direction: column">
+              <button class="btn btn-primary" (click)="onAddClick(false)" [disabled]="addForm.invalid">
+                Add
+              </button>
+              <button class="btn btn-danger" (click)="onCancelClickInAdd()">Cancel</button>
+              <button (click)="onAddClick(true)">static</button>
+            </div>
+          </td>
+        </ng-container>
       </tr>
     </tbody>
-    
   </table>
   <i class="bi bi-plus-square-fill" (click)="onNewClick()"></i>
-  
 </div>

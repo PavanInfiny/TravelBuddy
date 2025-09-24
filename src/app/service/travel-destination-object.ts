@@ -5,6 +5,37 @@ import { TravelObjectType } from '../model/TravelModel.type';
   providedIn: 'root'
 })
 export class TravelDestinationObject {
+  addPackageIfIdDoesNotExist(newPackage: TravelObjectType) {
+    if(this.getTravelDestinationById(newPackage.cityID).length==0){
+      this.TravelDestinationObjArray.push(newPackage);
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  // var tempvalue:string;
+   topThreeDesination():TravelObjectType[]{
+    
+    const filteredArray= this.TravelDestinationObjArray;
+  
+  const fullObj= filteredArray.sort((a, b) => {
+      const sortProperty = 'rating' as keyof TravelObjectType; // Cast to keyof TravelObjectType for type safety
+
+      const valA = a[sortProperty];
+      const valB = b[sortProperty];
+      
+      
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return valA.localeCompare(valB); 
+      } else if (typeof valA === 'number' && typeof valB === 'number') {
+        return valB - valA;
+      } else {
+        return 0;
+      }
+    });
+    return [fullObj[0],fullObj[1],fullObj[2]]
+  }
   updateDestinationDetailById(editId: string, editedPackage: TravelObjectType) {
     this.TravelDestinationObjArray=this.TravelDestinationObjArray.map(n=>
     {

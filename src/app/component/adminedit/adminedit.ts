@@ -19,8 +19,10 @@ export class Adminedit implements OnInit {
   // price = new FormControl();
   // image = new FormControl();
   // rating = new FormControl();
+  addNewCity: boolean = false;
   isEdit: boolean = false;
   editId: string = '';
+  addForm!: FormGroup;
   constructor(public service: TravelDestinationObject) {}
   editForm!: FormGroup;
   ngOnInit(): void {
@@ -38,6 +40,22 @@ export class Adminedit implements OnInit {
         Validators.pattern(/^https?:\/\/.+\.(jpg|png|jpeg|webp)$/i),
       ]),
       rating: new FormControl(0, [Validators.required, Validators.min(0), Validators.max(5)]),
+    });
+    this.addForm = new FormGroup({
+      cityid: new FormControl('', [Validators.required]),
+      cityname: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      citydescription: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      cityplaces: new FormControl('', [Validators.required]),
+      price: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(6),
+        Validators.pattern(/^\d+$/),
+      ]),
+      image: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^https?:\/\/.+\.(jpg|png|jpeg|webp)$/i),
+      ]),
+      rating: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5)]),
     });
   }
   onEditClick(id: string) {
@@ -60,8 +78,8 @@ export class Adminedit implements OnInit {
     // this.price.setValue(temp.price);
     // this.rating.setValue(temp.rating);
   }
-  onNewClick(){
-    
+  onNewClick() {
+    this.addNewCity = true;
   }
   onDeleteClick(id: string) {
     const confirm = window.confirm('Are you sure about deleting the package');
@@ -71,18 +89,61 @@ export class Adminedit implements OnInit {
   }
   onCancelClick() {
     this.editId = '';
-    this.isEdit=false;
+    this.isEdit = false;
     this.editForm.reset();
+  }
+  onAddClick(flag: boolean) {
+    var newPackage: TravelObjectType;
+    if (flag) {
+      newPackage = {
+        cityID: 'C008',
+        cityName: 'Banglore',
+        cityDescription: 'silicon city',
+        placesToSee: ['silkboard', 'ecity'],
+        show_image: 'hidden',
+        button_name: 'hide',
+        rating: 5,
+        btntype: 'btn-danger',
+        price: 20000,
+        image: 'https://wallpaperaccess.com/full/9267542.jpg',
+      };
+    } else {
+      const formValues = this.addForm.value;
+      console.log(formValues);
+      newPackage= {
+        cityID: formValues.cityid,
+        cityName: formValues.cityname,
+        cityDescription: formValues.citydescription,
+        placesToSee: formValues.cityplaces.split(','),
+        show_image: 'hidden',
+        button_name: 'hide',
+        rating: parseFloat(formValues.rating.toString()),
+        btntype: 'btn-danger',
+        price: parseFloat(formValues.price),
+        image: formValues.image,
+      };
+    }
+
+    if (this.service.addPackageIfIdDoesNotExist(newPackage)) {
+      alert('Package Added Sucessfully');
+      this.addNewCity = false;
+      this.addForm.reset();
+    } else {
+      alert('Package with the same id exist');
+    }
+  }
+  onCancelClickInAdd() {
+    this.addNewCity = false;
   }
   onSaveClick() {
     this.editForm.markAllAsTouched();
-    if(this.editForm.invalid){
-      console.log("The Form Is Invalid");
-      return
+    if (this.editForm.invalid) {
+      console.log('The Form Is Invalid');
+      return;
     }
-    const formValues=this.editForm.value;
-    
-    const editedPackage:TravelObjectType={
+    const formValues = this.editForm.value;
+
+    const editedPackage: TravelObjectType = {
       cityID: this.editId,
       cityName: formValues.cityname,
       cityDescription: formValues.citydescription,
@@ -92,8 +153,8 @@ export class Adminedit implements OnInit {
       rating: formValues.rating.toString(),
       btntype: 'btn-danger',
       price: parseInt(formValues.price),
-      image: formValues.image
-    }
+      image: formValues.image,
+    };
     // const editedPackage: TravelObjectType = {
     //   cityID: this.editId,
     //   cityName: this.cityname.value.toString(),
